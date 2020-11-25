@@ -9,7 +9,9 @@
   <van-tab title="注册">
     <account-register></account-register>
   </van-tab>
-  <van-tab title="关于星享俱乐部">关于星享俱乐部</van-tab>
+  <van-tab title="关于星享俱乐部">
+    <account-star-club></account-star-club>
+  </van-tab>
 </van-tabs>
   </div>
   
@@ -20,6 +22,7 @@
 import AccountLogin from '@/components/myAccount/account-login'  //登录
 import AccountRegister from '@/components/myAccount/account-register'  //注册
 import AccountStarClub from '@/components/myAccount/account-star-club'  // 星享俱乐部
+
 export default {
    components:{
      AccountLogin,
