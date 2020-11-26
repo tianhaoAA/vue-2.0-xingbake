@@ -1,10 +1,11 @@
 <template>
 <!-- 我的账户 -->
-  <div class="myAccount">
+  <div>
+    <div class="myAccount" v-if="!noLogin">
   <h1 class="title">  登录或创建一个新帐户 🌟 </h1>
   <van-tabs v-model="active" color='#00a862'>
   <van-tab title="登录">
-     <account-login></account-login>
+     <account-login @loginSussess='loginSussess'></account-login>
   </van-tab>
   <van-tab title="注册">
     <account-register></account-register>
@@ -13,6 +14,10 @@
     <account-star-club></account-star-club>
   </van-tab>
 </van-tabs>
+  </div>
+  <div v-if="noLogin">
+  登录成功
+  </div>
   </div>
   
 </template>
@@ -31,9 +36,19 @@ export default {
    },
     data(){
        return {
-         active:0
+         active:0,
+         noLogin:false
        }
-    }
+    },
+    methods:{
+      loginSussess(){
+        this.noLogin =true
+      }
+    },
+    created(){
+    this.noLogin = this.$store.state.isLogin
+    // console.log(  this.$store.state.isLogin);
+  }
 }
 </script>
 

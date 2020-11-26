@@ -1,6 +1,7 @@
 <template>
   <div>
-    <account-header></account-header>
+  <div>
+      <account-header></account-header>
     <div class="login">
       <van-field
         label="手机号"
@@ -49,6 +50,9 @@
         >
       </div>
     </div>
+  </div>
+
+  
   </div>
 </template>
 
@@ -117,6 +121,10 @@ export default {
         Toast.fail("验证码必须为6位数字");
         return false;
       }
+      Toast.loading({
+        message: "加载中...",
+        forbidClick: true,
+      });
       try {
         const data = {
           mobile: this.loginForm.mobile,
@@ -124,16 +132,21 @@ export default {
         };
         const result = await login(data);
         console.log("登录响应回来的数据", result);
-        if(result.data.err_code===1){
-            Toast.fail("验证码错误");
-        }else if(result.data.err_code===0){
-               Toast.success("登录成功");
+        if (result.data.err_code === 1) {
+          Toast.fail("验证码错误")
+        } else if (result.data.err_code === 0) {
+          // 表示登录成功
+          this.$emit('loginSussess')
+          this.$store.commit('SET_COM_LOGIN',true)
+            Toast.clear()
         }
+        
       } catch (error) {
         Toast.fail("服务器连接超时");
       }
     },
   },
+  
 };
 </script>
 
