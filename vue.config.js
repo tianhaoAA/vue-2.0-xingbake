@@ -10,6 +10,14 @@ module.exports = {
                     "^/api": ""
                 }
             },
+            "/apiMap": {
+                target: "https://apis.map.qq.com/", //对应自己的接口
+                changeOrigin: true, //允许跨越
+                ws: true,
+                pathRewrite: { //重写路径
+                    "^/apiMap": ""
+                }
+            },
         },
         // open: true, //是否自动打开浏览器
         overlay: {

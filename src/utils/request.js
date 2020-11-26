@@ -3,6 +3,7 @@
 import axios from 'axios'
                         
 axios.defaults.baseURL = '/api' //本地开发代理服务器
+// axios.defaults.baseURL = '/apiMap' //本地开发代理服务器
 
 
 
