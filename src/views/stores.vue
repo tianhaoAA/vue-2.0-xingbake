@@ -1,8 +1,16 @@
 <template>
 <!-- 门店页面 -->
   <div> 
+    <div class="search">
+     <input v-model=" getAndLocation" type="text"  placeholder="请输入城市的位置">
+      <div class="search-content" ref="search" v-show="keyword">
+            <ul>
+                <li class="search-item border-bottom" v-for="item of list" :key="item.id" @click="handleCityClick(item.name)">{{ item.name }}</li>
+                <li class="search-item border-bottom" v-show="hasNoData">没有找到匹配数据</li>
+            </ul>
+        </div>
+    </div>
     <van-field  v-model=" getAndLocation" label="当前位置信息" placeholder="请输入位置" />
-    <!-- <div> 当前位置信息 {{ userPositon.province}} {{ userPositon.city}} {{ userPositon.district}} </div> -->
   <div ref="container" style="width:100%;height:250px;margin-top:20px"></div>
   </div>
 </template>
@@ -11,6 +19,7 @@
  import {Tmap} from '@/utils/TMap.js'
  import axios from 'axios'
  import {geturl} from '@/api/mapUrl.js'
+//  import Bscroll from 'better-scroll'
 export default {
   data(){
     return{
@@ -25,13 +34,49 @@ export default {
           }
         },
         getAndLocation:null, //绑定当前的信息
-        markersArray:[] //用来存储标注的
+        markersArray:[] ,//用来存储标注的
+       keyword: '', // 输入值的值
+       list: [],
+       timer: null
+    }
+  },
+   watch: {
+    keyword () {
+      if (this.timer) {
+        clearTimeout(this.timer)
+      }
+      if (!this.keyword) {
+        this.list = []
+        return
+      }
+      this.timer = setTimeout(() => {
+        const result = []
+        for (let i in this.cities) {
+          this.cities[i].forEach((value) => {
+            if (value.spell.indexOf(this.keyword) > -1 || value.name.indexOf(this.keyword) > -1) {
+              result.push(value)
+            }
+          })
+        }
+        this.list = []
+      }, 100)
+    }
+  },
+   computed: {
+    hasNoData () {
+      return !this.list.length
     }
   },
   mounted(){
     this.getAndTMap()
+    //  this.scroll = new Bscroll(this.$refs.search)
   },
   methods:{
+
+  handleCityClick (city) {
+      this.changeCity(city)
+      this.$router.push('/')
+    },
      // 页面创建地图
     getAndTMap(){
       Tmap().then(qq=>{

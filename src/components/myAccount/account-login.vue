@@ -161,7 +161,7 @@ export default {
     width: 100%;
     height: 265px;
     background: url("../../assets/static/images/account-join/account-join-bg.png")
-      no-repeat;
+     no-repeat;
     background-size: cover;
     .title_footer {
       color: #fff;
