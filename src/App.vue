@@ -31,12 +31,12 @@ created(){
   else if ( this.$route.path==='/myAccount'){
     this.active =2
   }
-  else if ( this.$route.path==='/menus'){
+  else if ( this.$route.path.substring(0,6)==='/menus'){
     this.active =3
   }else if ( this.$route.path==='/mores'){
     this.active =4
   }
-//  console.log( '当前的路由',  this.$route.path);
+ console.log( '当前的路由',  this.$route);
 }
 }
 </script>
