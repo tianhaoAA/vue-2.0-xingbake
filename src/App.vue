@@ -36,7 +36,7 @@ created(){
   }else if ( this.$route.path==='/mores'){
     this.active =4
   }
- console.log( '当前的路由',  this.$route);
+//  console.log( '当前的路由',  this.$route);
 }
 }
 </script>

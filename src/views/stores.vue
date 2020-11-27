@@ -94,7 +94,7 @@ export default {
     },
   },
   mounted() {
-    this.getAndTMap();
+    // this.getAndTMap();
     this.scroll = new Bscroll(this.$refs.search, {
       click: true,
     });
@@ -112,6 +112,7 @@ export default {
     // 点击li 事件
     chooseCustomer(value) {
       this.searchcursom = value.address; //地址信息
+       this.getAndLocation = value.address;
       // console.log('点击的值', value.location )
       this.userPositon.location.lat = value.location.lat
       this.userPositon.location.lng =value.location.lng
@@ -228,6 +229,7 @@ export default {
           this.userPositon.province +
           this.userPositon.city +
           this.userPositon.district;
+             this.getAndTMap();
       });
     },
   },

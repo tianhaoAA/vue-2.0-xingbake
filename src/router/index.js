@@ -4,6 +4,7 @@ import Home from '@/views/home.vue'  //首页
 import Stores from '@/views/stores.vue'  //门店
 import MyAccount from '@/views/myAccount.vue'  //我的账户
 
+
 import Menus from '@/views/menus/index.vue'  //菜单
 import MenusDrinks from '@/views/menus/drinks.vue'  //饮料
 import MenusFood from '@/views/menus/food.vue'  //美食
